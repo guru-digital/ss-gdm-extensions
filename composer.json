@@ -1,0 +1,12 @@
+{
+    "name": "gdmedia/silverstripe-gdm-extensions",
+    "description": "Handy extensions for SilverStripe",
+    "type": "silverstripe-module",
+    "require": {
+        "silverstripe/cms": "^3.1",
+        "composer/installers": "*",
+    },
+    "extra": {
+        "installer-name": "silverstripe-gdm-extensions"
+    }
+}

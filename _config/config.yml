@@ -1,0 +1,19 @@
+---
+Name: Silverstripe GDM Extensions
+---
+SiteTree:
+  extensions:
+    - SSGDMExpressSiteTree
+ContentController:
+  extensions:
+    - SSGDMExpressSiteTree_Controller
+SiteConfig:
+  extensions:
+    - SSGDMExpressSiteConfig
+Page:
+  extensions:
+    - SSGDMExpressPageUtilities
+ViewableData:
+  extensions:
+    - SSGDMExpressViewableData
+
