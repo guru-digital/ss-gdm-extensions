@@ -1,8 +1,8 @@
 <?php
 
-class SSGDMExpressSiteTree extends SiteTreeExtension {
+class SSGuru_SiteTree extends SiteTreeExtension {
 
-    static $icon = 'silverstripe-gdm-express/assets/images/sitetree_images/page.png';
+    static $icon = 'silverstripe-gdm-extensions/assets/images/sitetree-images/page.png';
     private $menuChildren;
 
     public function MenuChildren() {

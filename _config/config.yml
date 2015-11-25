@@ -3,17 +3,21 @@ Name: Silverstripe GDM Extensions
 ---
 SiteTree:
   extensions:
-    - SSGDMExpressSiteTree
+    - SSGuru_ViewableData
+    - SSGuru_SiteTree
 ContentController:
   extensions:
-    - SSGDMExpressSiteTree_Controller
-SiteConfig:
+    - SSGuru_SiteTree_Controller
+ErrorPage:
   extensions:
-    - SSGDMExpressSiteConfig
-Page:
-  extensions:
-    - SSGDMExpressPageUtilities
+    - SSGuru_ErrorPage
 ViewableData:
   extensions:
-    - SSGDMExpressViewableData
+    - SSGuru_ViewableData
+Page:
+  extensions:
+    - SSGuru_PageUtilities
+DataObject:
+  extensions:
+    - SSGuru_ViewableData
 

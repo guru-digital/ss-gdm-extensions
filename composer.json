@@ -1,10 +1,14 @@
 {
     "name": "gdmedia/silverstripe-gdm-extensions",
-    "description": "Handy extensions for SilverStripe",
+    "description": "Handy extensions and models for SilverStripe",
     "type": "silverstripe-module",
     "require": {
         "silverstripe/cms": "^3.1",
         "composer/installers": "*",
+        "silverstripe-australia/gridfieldextensions": "^1",
+        "colymba/gridfield-bulk-editing-tools": "^2.1",
+        "sheadawson/silverstripe-linkable": "^1.0",
+        "unclecheese/betterbuttons": "^1.2"
     },
     "extra": {
         "installer-name": "silverstripe-gdm-extensions"

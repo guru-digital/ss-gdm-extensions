@@ -1,6 +1,6 @@
 <?php
 
-class SSGDMExpressSiteTree_Controller extends Extension {
+class SSGuru_ContentController extends Extension {
 
     public static $allowed_actions = array();
 

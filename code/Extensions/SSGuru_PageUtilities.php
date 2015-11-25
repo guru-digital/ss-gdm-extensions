@@ -1,6 +1,6 @@
 <?php
 
-class SSGDMExpressPageUtilities extends DataExtension {
+class SSGuru_PageUtilities extends DataExtension {
 
     private $forceLeft  = false;
     private $forceRight = false;
