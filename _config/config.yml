@@ -7,7 +7,7 @@ SiteTree:
     - SSGuru_SiteTree
 ContentController:
   extensions:
-    - SSGuru_SiteTree_Controller
+    - SSGuru_ContentController
 ErrorPage:
   extensions:
     - SSGuru_ErrorPage

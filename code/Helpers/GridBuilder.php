@@ -63,8 +63,8 @@ class GridBuilder {
 	 * @return \self
 	 */
 	static public function createRelationSortableGrid($sortField = "Sort") {
-		$result				 = new self();
-		$result->gridConfig	 = GridFieldConfig_RelationEditor::create()
+		$result				 = self::createRelation();
+		$result->gridConfig
 				->addComponent(GridFieldOrderableRows::create($sortField));
 		return $result;
 	}
