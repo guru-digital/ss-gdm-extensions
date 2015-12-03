@@ -70,25 +70,36 @@ class SSGuru_PageUtilities extends DataExtension {
         return $cssClass;
     }
 
-    public function ImageFolder($subfolder = null) {
-        return $this->CleanStringForFolder($this->owner->MenuTitle) . ($subfolder ? "/" . $this->CleanStringForFolder($subfolder) : ""); 
+    public function getAssetFolder($subfolder = "") {
+        return $this->SanitizePath($this->owner->MenuTitle . "/" . $subfolder);
     }
 
-    private function CleanStringForFolder($string) {
+    public function ImageFolder($subfolder = "") {
+        return $this->getAssetFolder($subfolder);
+    }
 
-        return
-                // Make folder always lower case
-                strtolower(
-                    // Remove - and / from ends
-                    trim(
-                            // Remove duplicate -
-                            preg_replace('/' . preg_quote("-") . '[' . preg_quote("-") . ']*/', "-",
-                                // Replace any non alphanumeric characters with a -
-                                preg_replace('/[^a-z0-9]/i', "-", $string)
-                            ),
-                        // 2nd arg to first trim
-                    "-/")
-                );
+    private function SanitizePath($string) {
+        // Make path lower case and replace back slashes with forward slashes
+        $result  = strtolower(str_replace("\\", '/', $string));
+        $dash    = preg_quote("-");
+        $search  = array(
+            // Remove duplicate slashes
+            "@/+@",
+            // Remove non alpha numeric characters ( except forward slashes )
+            "@[^a-z0-9/]@i",
+            // Remove duplicate dashes
+            "@${dash}+@",
+            // Replace instances of -/ or /- with /
+            "@${dash}/|/${dash}@"
+        );
+        $replace = array(
+            "/",
+            "-",
+            "-",
+            "/"
+        );
+        //Trim any forward slashes or dashes from the start/end
+        return trim(preg_replace($search, $replace, $result), "/-");
     }
 
     function FindChildrenOfType($objectType, $all = false, $limit = null) {
