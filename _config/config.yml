@@ -20,4 +20,6 @@ SiteTree:
 ViewableData:
   extensions:
     - SSGuru_ViewableData
-
+GridFieldBulkUpload_Request:
+  extensions:
+    - SSGuru_KickAssetsGridFieldBulkUpload_Request
