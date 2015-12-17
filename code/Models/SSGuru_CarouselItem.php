@@ -10,22 +10,23 @@
  * @method Link Link()
  * @method type methodName(type $paramName) Description
  */
-class SSGuru_CarouselItem extends DataObject {
+class SSGuru_CarouselItem extends DataObject
+{
 
     private static $singular_name = "Carousel Item";
     private static $plural_name   = "Carousel Items";
-    static $db                    = array(
+    public static $db                    = array(
         'Title'    => 'Varchar(255)',
         'Caption'  => 'Text',
         'Archived' => 'Boolean',
         'SortID'   => 'Int'
     );
-    static $has_one               = array(
+    public static $has_one               = array(
         'Parent' => 'Page',
         'Image'  => 'Image',
         'Link'   => 'Link'
     );
-    static $summary_fields        = array(
+    public static $summary_fields        = array(
         'ImageThumb'       => 'Image',
         'Title'            => 'Title',
         'Caption'          => 'Text',
@@ -33,7 +34,8 @@ class SSGuru_CarouselItem extends DataObject {
         'ArchivedReadable' => 'Current Status'
     );
 
-    function getCMSFields() {
+    public function getCMSFields()
+    {
         $fields = parent::getCMSFields();
         $fields->removeByName('ParentID');
         $fields->removeByName('SortID');
@@ -58,12 +60,13 @@ class SSGuru_CarouselItem extends DataObject {
         return $fields;
     }
 
-    function ImageThumb() {
+    public function ImageThumb()
+    {
         return $this->Image()->SetWidth(50);
     }
 
-    function ArchivedReadable() {
+    public function ArchivedReadable()
+    {
         return $this->Archived ? _t('GridField.Archived', 'Archived') : _t('GridField.Live', 'Live');
     }
-
 }
