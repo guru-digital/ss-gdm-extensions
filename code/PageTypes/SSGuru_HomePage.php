@@ -1,7 +1,7 @@
 <?php
 
-class SSGuru_HomePage extends Page {
+class SSGuru_HomePage extends Page
+{
 
-	static $icon = 'silverstripe-gdm-extensions/assets/images/sitetree-images/home.png';
-
+    public static $icon = 'silverstripe-gdm-extensions/assets/images/sitetree-images/home.png';
 }

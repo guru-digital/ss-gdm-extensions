@@ -1,24 +1,30 @@
 <?php
 
-class SSGuru_Requirements_Backend extends Requirements_Backend {
+class SSGuru_Requirements_Backend extends Requirements_Backend
+{
 
-    public function javascript($file) {
+    public function javascript($file)
+    {
         return parent::javascript($this->findRequirementFile($file, "js"));
     }
 
-    public function css($file, $media = null) {
+    public function css($file, $media = null)
+    {
         return parent::css($this->findRequirementFile($file, "css"), $media);
     }
 
-    public function themedCSS($name, $module = null, $media = null) {
+    public function themedCSS($name, $module = null, $media = null)
+    {
         return parent::themedCSS($name, $module, $media);
     }
 
-    protected function isURL($fileOrUrl) {
+    protected function isURL($fileOrUrl)
+    {
         return preg_match('{^//|http[s]?}', $fileOrUrl);
     }
 
-    protected function findRequirementFile($fileToFind, $ext) {
+    protected function findRequirementFile($fileToFind, $ext)
+    {
         $result = $fileToFind;
         if (!$this->isURL($result) && !Director::fileExists($result)) {
             $lookedIn   = array();
@@ -41,7 +47,8 @@ class SSGuru_Requirements_Backend extends Requirements_Backend {
         return $result;
     }
 
-    protected function getFileList($fileToFind, $ext) {
+    protected function getFileList($fileToFind, $ext)
+    {
         $cleanExt  = "." . ltrim($ext, ".");
         $fileNoExt = preg_replace("/(.min)?" . $cleanExt . "$/", "", $fileToFind);
         // If dev mode .min has less priority
@@ -56,11 +63,12 @@ class SSGuru_Requirements_Backend extends Requirements_Backend {
         );
     }
 
-    protected function getFolderList($ext) {
+    protected function getFolderList($ext)
+    {
         $subFolders = array();
         if (strrpos($ext, "css", -strlen($ext)) !== false) {
             $subFolders[] = "css";
-        } else if (strrpos($ext, "js", -strlen($ext)) !== false) {
+        } elseif (strrpos($ext, "js", -strlen($ext)) !== false) {
             $subFolders[] = "javascript";
             $subFolders[] = "js";
         }
@@ -79,8 +87,8 @@ class SSGuru_Requirements_Backend extends Requirements_Backend {
         return $result;
     }
 
-    protected function path_for_file($fileOrUrl) {
+    protected function path_for_file($fileOrUrl)
+    {
         return parent::path_for_file($fileOrUrl);
     }
-
 }

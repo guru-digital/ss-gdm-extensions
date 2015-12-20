@@ -1,12 +1,14 @@
 <?php
 
-class SSGuru_PageUtilities extends DataExtension {
+class SSGuru_PageUtilities extends DataExtension
+{
 
     private $forceLeft  = false;
     private $forceRight = false;
 
     // Get name - will be wrapped in anchor HTML if $linkl isset
-    public function GetNamedLink($name, $link, $target = null) {
+    public function GetNamedLink($name, $link, $target = null)
+    {
         $result = '';
         if (strlen($name) != 0) {
             $result = $name;
@@ -17,25 +19,28 @@ class SSGuru_PageUtilities extends DataExtension {
         return $result;
     }
 
-    public function setHasLeft($value) {
+    public function setHasLeft($value)
+    {
         $this->forceLeft = $value;
     }
 
-    public function setHasRight($value) {
+    public function setHasRight($value)
+    {
         $this->forceRight = $value;
     }
 
-    public function GetHasSide($side) {
+    public function GetHasSide($side)
+    {
         $widgetArea = null;
         $result     = false;
         if ($this->forceLeft && (strtolower($side) == "left")) {
             $result = true;
-        } else if ($this->forceRight && (strtolower($side) == "right")) {
+        } elseif ($this->forceRight && (strtolower($side) == "right")) {
             $result = true;
-        } else if ($this->owner->hasExtension("WidgetPage")) {
+        } elseif ($this->owner->hasExtension("WidgetPage")) {
             if (strtolower($side) == "right") {
                 $widgetArea = $this->owner->WidgetArea("RightSideBar");
-            } else if (strtolower($side) == "left") {
+            } elseif (strtolower($side) == "left") {
                 $widgetArea = $this->owner->WidgetArea("LeftSideBar");
             }
             $result = $widgetArea && $widgetArea->exists();
@@ -43,7 +48,8 @@ class SSGuru_PageUtilities extends DataExtension {
         return $result;
     }
 
-    public function GetLeftCssClass() {
+    public function GetLeftCssClass()
+    {
         $cssClass = "side left";
         if ($this->GetHasSide("right")) {
             $cssClass .= " has-right";
@@ -51,7 +57,8 @@ class SSGuru_PageUtilities extends DataExtension {
         return $cssClass;
     }
 
-    public function GetCenterCssClass() {
+    public function GetCenterCssClass()
+    {
         $cssClass = "center";
         if ($this->GetHasSide("right")) {
             $cssClass .= " has-right";
@@ -62,7 +69,8 @@ class SSGuru_PageUtilities extends DataExtension {
         return $cssClass;
     }
 
-    public function GetRightCssClass() {
+    public function GetRightCssClass()
+    {
         $cssClass = "side right";
         if ($this->GetHasSide("left")) {
             $cssClass .= " has-left";
@@ -70,15 +78,18 @@ class SSGuru_PageUtilities extends DataExtension {
         return $cssClass;
     }
 
-    public function getAssetFolder($subfolder = "") {
+    public function getAssetFolder($subfolder = "")
+    {
         return $this->SanitizePath($this->owner->MenuTitle . "/" . $subfolder);
     }
 
-    public function ImageFolder($subfolder = "") {
+    public function ImageFolder($subfolder = "")
+    {
         return $this->getAssetFolder($subfolder);
     }
 
-    private function SanitizePath($string) {
+    private function SanitizePath($string)
+    {
         // Make path lower case and replace back slashes with forward slashes
         $result  = strtolower(str_replace("\\", '/', $string));
         $dash    = preg_quote("-");
@@ -102,7 +113,8 @@ class SSGuru_PageUtilities extends DataExtension {
         return trim(preg_replace($search, $replace, $result), "/-");
     }
 
-    function FindChildrenOfType($objectType, $all = false, $limit = null) {
+    public function FindChildrenOfType($objectType, $all = false, $limit = null)
+    {
         $result   = new ArrayList();
         $children = $all ? $this->owner->AllChildren() : $this->owner->Children();
         foreach ($children as $child) {
@@ -119,20 +131,22 @@ class SSGuru_PageUtilities extends DataExtension {
         return $result;
     }
 
-    function GetAllChildrenOfType($objectType, $limit = null) {
+    public function GetAllChildrenOfType($objectType, $limit = null)
+    {
         return $this->FindChildrenOfType($objectType, true, $limit);
     }
 
-    function GetChildrenOfType($objectType, $limit = null) {
+    public function GetChildrenOfType($objectType, $limit = null)
+    {
         return $this->FindChildrenOfType($objectType, false, $limit);
     }
 
-    function GetFirstParentOfType($objectType) {
+    public function GetFirstParentOfType($objectType)
+    {
         $parent = $this->owner->Parent();
         while ($parent->ClassName !== $objectType && $parent->ParentID !== 0 && $parent->exists()) {
             $parent = $parent->Parent();
         }
         return $parent->ClassName === $objectType ? $parent : false;
     }
-
 }
