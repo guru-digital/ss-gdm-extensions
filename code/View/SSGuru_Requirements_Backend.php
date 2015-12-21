@@ -38,7 +38,7 @@ class SSGuru_Requirements_Backend extends Requirements_Backend {
                 $lookedIn[] = $result;
             }
 
-            if (Config::inst()->forClass(get_called_class())->get("WarnOnNotFound") && !Director::fileExists($result)) {
+            if (Config::inst()->forClass(get_called_class())->get("WarnOnNotFound") && !Director::fileExists($result) && Director::isDev()) {
                 Debug::message("Requirement file \"" . $fileToFind . "\" not found");
                 $lookedIn[] = Director::getAbsFile($fileToFind);
                 Debug::dump($lookedIn);
