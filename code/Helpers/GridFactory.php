@@ -19,7 +19,8 @@ class GridFactory
      * @param GridFieldConfig $gridFieldConfig
      * @return GridField
      */
-    public static function RelationGrid($name, $title = null, SS_List $dataList = null)
+    public static function RelationGrid($name, $title = null,
+                                        SS_List $dataList = null)
     {
         return GridBuilder::createRelation()->getGrid($name, $title, $dataList);
     }
@@ -46,9 +47,13 @@ class GridFactory
      * @param GridFieldConfig $gridFieldConfig
      * @return GridField
      */
-    public static function RelationSortableGrid($name, $title = null, SS_List $dataList = null, $sortField = "Sort")
+    public static function RelationSortableGrid($name, $title = null,
+                                                SS_List $dataList = null,
+                                                $sortField = "Sort")
     {
-        return GridBuilder::createRelationSortableGrid($sortField)->getGrid($name, $title, $dataList);
+        return GridBuilder::createRelationSortableGrid($sortField)->getGrid($name,
+                                                                            $title,
+                                                                            $dataList);
     }
 
     /**
@@ -67,9 +72,15 @@ class GridFactory
      * @param SS_List $dataList
      * @return GridField
      */
-    public static function RelationBulkUploadGrid($name, $title = null, SS_List $dataList = null, $fileRelationName = null, $folderName = null)
+    public static function RelationBulkUploadGrid($name, $title = null,
+                                                  SS_List $dataList = null,
+                                                  $fileRelationName = null,
+                                                  $folderName = null)
     {
-        return GridBuilder::createRelation()->addBulkUploader($fileRelationName, $folderName)->getGrid($name, $title, $dataList);
+        return GridBuilder::createRelation()->addBulkUploader($fileRelationName,
+                                                              $folderName)->getGrid($name,
+                                                                                    $title,
+                                                                                    $dataList);
     }
 
     /**
@@ -95,8 +106,15 @@ class GridFactory
      * @param String $folderName
      * @return GridField
      */
-    public static function RelationSortableBulkUploadGrid($name, $title = null, SS_List $dataList = null, $sortField = "Sort", $fileRelationName = null, $folderName = null)
+    public static function RelationSortableBulkUploadGrid($name, $title = null,
+                                                          SS_List $dataList = null,
+                                                          $sortField = "Sort",
+                                                          $fileRelationName = null,
+                                                          $folderName = null)
     {
-        return GridBuilder::createRelationSortableGrid($sortField)->addBulkUploader($fileRelationName, $folderName)->getGrid($name, $title, $dataList);
+        return GridBuilder::createRelationSortableGrid($sortField)->addBulkUploader($fileRelationName,
+                                                                                    $folderName)->getGrid($name,
+                                                                                                          $title,
+                                                                                                          $dataList);
     }
 }

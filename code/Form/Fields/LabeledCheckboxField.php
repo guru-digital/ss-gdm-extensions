@@ -2,7 +2,6 @@
 
 class LabeledCheckboxField extends CompositeField
 {
-
     /**
      *
      * @var LabelField
@@ -39,7 +38,8 @@ class LabeledCheckboxField extends CompositeField
 
     public function __construct($name, $title = null, $value = null)
     {
-        $this->labelField     = LabelField::create($name . "Label", self::name_to_label($name))->addExtraClass("left");
+        $this->labelField    = LabelField::create($name."Label",
+                                                  self::name_to_label($name))->addExtraClass("left");
         $this->checkboxField = CheckboxField::create($name, "", $value);
         $this->labelField->setTemplate("LabeledCheckboxLabelField");
         $this->addExtraClass("field");
