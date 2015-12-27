@@ -3,6 +3,24 @@
 class SSGuru_Requirements_Backend extends Requirements_Backend
 {
 
+    public function combine_files($combinedFileName, $files, $media = null)
+    {
+        if (is_array($files)) {
+            $result = array();
+            foreach ($files as $file) {
+                if (substr($combinedFileName, -3) == 'css') {
+                    $result[] = $this->findRequirementFile($file, "css");
+                } else if (substr($combinedFileName, -2) == 'js') {
+                    $result[] = $this->findRequirementFile($file, "js");
+                }
+            }
+            if ($result) {
+                $files = $result;
+            }
+        }
+        parent::combine_files($combinedFileName, $files, $media);
+    }
+
     public function javascript($file)
     {
         return parent::javascript($this->findRequirementFile($file, "js"));

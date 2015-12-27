@@ -1,4 +1,5 @@
 <?php
+
 if (!class_exists("CarouselItem")) {
 
     /**
@@ -7,6 +8,5 @@ if (!class_exists("CarouselItem")) {
      */
     class CarouselItem extends SSGuru_CarouselItem
     {
-        
     }
 }

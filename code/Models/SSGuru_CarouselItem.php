@@ -12,20 +12,21 @@
  */
 class SSGuru_CarouselItem extends DataObject
 {
+
     private static $singular_name = "Carousel Item";
     private static $plural_name   = "Carousel Items";
-    public static $db             = array(
+    public static $db                    = array(
         'Title'    => 'Varchar(255)',
         'Caption'  => 'Text',
         'Archived' => 'Boolean',
         'SortID'   => 'Int'
     );
-    public static $has_one        = array(
+    public static $has_one               = array(
         'Parent' => 'Page',
         'Image'  => 'Image',
         'Link'   => 'Link'
     );
-    public static $summary_fields = array(
+    public static $summary_fields        = array(
         'ImageThumb'       => 'Image',
         'Title'            => 'Title',
         'Caption'          => 'Text',
@@ -41,20 +42,19 @@ class SSGuru_CarouselItem extends DataObject
 
         $fields->removeByName('Archived');
         $fields->addFieldToTab('Root.Main', LinkField::create('LinkID', 'Link'));
-        $fields->addFieldToTab('Root.Main',
-                               CompositeField::create(array(
-                LabelField::create("LabelArchive", "Archive this carousel item?")->addExtraClass("left"),
-                CheckboxField::create('Archived', '')
-            ))->addExtraClass("field special")
+        $fields->addFieldToTab('Root.Main', CompositeField::create(array(
+                    LabelField::create("LabelArchive", "Archive this carousel item?")->addExtraClass("left"),
+                    CheckboxField::create('Archived', '')
+                ))->addExtraClass("field special")
         );
         $imageField = $fields->dataFieldByName('Image');
         if ($imageField) {
             $imageField->
-                setAllowedFileCategories("image")->
-                setAllowedMaxFileNumber(1);
+                    setAllowedFileCategories("image")->
+                    setAllowedMaxFileNumber(1);
             if ($this->Parent() && $this->Parent()->hasMethod("ImageFolder")) {
                 $imageField->
-                    setFolderName($this->Parent()->ImageFolder("carousel"));
+                        setFolderName($this->Parent()->ImageFolder("carousel"));
             }
         }
         return $fields;
@@ -67,7 +67,6 @@ class SSGuru_CarouselItem extends DataObject
 
     public function ArchivedReadable()
     {
-        return $this->Archived ? _t('GridField.Archived', 'Archived') : _t('GridField.Live',
-                                                                           'Live');
+        return $this->Archived ? _t('GridField.Archived', 'Archived') : _t('GridField.Live', 'Live');
     }
 }

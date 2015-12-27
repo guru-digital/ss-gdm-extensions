@@ -5,6 +5,7 @@
  */
 class SSGuru_KickAssetsGridFieldBulkUpload_Request extends DataExtension
 {
+
     private static $allowed_actions = array(
         'folderid'
     );

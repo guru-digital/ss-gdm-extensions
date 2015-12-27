@@ -2,6 +2,7 @@
 
 class GridBuilder
 {
+
     private $gridConfig;
 
     public function getGridConfig()
@@ -18,7 +19,6 @@ class GridBuilder
     // Make constructor private to for creation via on of the static create* methods
     private function __construct()
     {
-        
     }
 
     /**
@@ -27,8 +27,8 @@ class GridBuilder
      */
     public static function create()
     {
-        $result             = new self();
-        $result->gridConfig = GridFieldConfig::create();
+        $result                 = new self();
+        $result->gridConfig     = GridFieldConfig::create();
         return $result;
     }
 
@@ -45,10 +45,10 @@ class GridBuilder
      */
     public static function createRelation()
     {
-        $result             = new self();
-        $result->gridConfig = GridFieldConfig_RelationEditor::create()
-            ->addComponent(new GridFieldAddExistingSearchButton())
-            ->removeComponentsByType('GridFieldAddExistingAutocompleter');
+        $result                 = new self();
+        $result->gridConfig     = GridFieldConfig_RelationEditor::create()
+                ->addComponent(new GridFieldAddExistingSearchButton())
+                ->removeComponentsByType('GridFieldAddExistingAutocompleter');
         return $result;
     }
 
@@ -69,9 +69,9 @@ class GridBuilder
      */
     public static function createRelationSortableGrid($sortField = "Sort")
     {
-        $result = self::createRelation();
+        $result                 = self::createRelation();
         $result->gridConfig
-            ->addComponent(GridFieldOrderableRows::create($sortField));
+                ->addComponent(GridFieldOrderableRows::create($sortField));
         return $result;
     }
 
@@ -83,8 +83,7 @@ class GridBuilder
      */
     public function addBulkUploader($fileRelationName = null, $folderName = null)
     {
-        $gridFieldBulkUpload = Injector::inst()->create("GridFieldBulkUpload",
-                                                        $fileRelationName);
+        $gridFieldBulkUpload = Injector::inst()->create("GridFieldBulkUpload", $fileRelationName);
         if ($folderName) {
             $gridFieldBulkUpload->setUfSetup("setFolderName", $folderName);
         }
