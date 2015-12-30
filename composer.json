@@ -6,11 +6,10 @@
         "silverstripe/cms": "^3.1",
         "composer/installers": "*",
         "silverstripe-australia/gridfieldextensions": "^1",
-        "colymba/gridfield-bulk-editing-tools": "^2.1",
+        "gdmedia/kickassets-gridfieldbulkediting": "^0.1.2",
         "silverstripe/userforms": "^3.1",
         "sheadawson/silverstripe-linkable": "^1.0",
-        "unclecheese/betterbuttons": "^1.2",
-        "unclecheese/silverstripe-kickassets": "^3.0"
+        "unclecheese/betterbuttons": "^1.2"
     },
     "extra": {
         "installer-name": "silverstripe-gdm-extensions"
