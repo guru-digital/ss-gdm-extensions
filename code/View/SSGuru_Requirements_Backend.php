@@ -62,8 +62,7 @@ class SSGuru_Requirements_Backend extends Requirements_Backend
                 $lookedIn[] = $result;
             }
 
-            if (Config::inst()->forClass(get_called_class())->get("WarnOnNotFound")
-                && !Director::fileExists($result) && Director::isDev()) {
+            if (Config::inst()->forClass(get_called_class())->get("WarnOnNotFound") && !Director::fileExists($result) && Director::isDev()) {
                 Debug::message("Requirement file \"".$fileToFind."\" not found");
                 $lookedIn[] = Director::getAbsFile($fileToFind);
                 Debug::dump($lookedIn);
@@ -115,5 +114,34 @@ class SSGuru_Requirements_Backend extends Requirements_Backend
     protected function path_for_file($fileOrUrl)
     {
         return parent::path_for_file($fileOrUrl);
+    }
+
+    public static function enable()
+    {
+        if (!Requirements::backend() instanceof SSGuru_Requirements_Backend) {
+            Requirements::set_backend(SSGuru_Requirements_Backend::createFromExisting(Requirements::backend()));
+        }
+    }
+
+    public static function createFromExisting($sourceObject)
+    {
+
+        $result                = new static();
+        $sourceReflection      = new ReflectionObject($sourceObject);
+        $destinationReflection = new ReflectionObject($result);
+        $sourceProperties      = $sourceReflection->getProperties();
+        foreach ($sourceProperties as $sourceProperty) {
+            $sourceProperty->setAccessible(true);
+            $name  = $sourceProperty->getName();
+            $value = $sourceProperty->getValue($sourceObject);
+            if ($destinationReflection->hasProperty($name)) {
+                $propDest = $destinationReflection->getProperty($name);
+                $propDest->setAccessible(true);
+                $propDest->setValue($result, $value);
+            } else {
+                $result->$name = $value;
+            }
+        }
+        return $result;
     }
 }

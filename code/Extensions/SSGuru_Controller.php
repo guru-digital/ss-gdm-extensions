@@ -6,6 +6,11 @@
 class SSGuru_Controller extends Extension
 {
 
+    public function onBeforeInit()
+    {
+        SSGuru_Requirements_Backend::enable();
+    }
+
     /**
      * This function will return true if the current controller .
      * For information about environment types, see {@link Director::set_environment_type()}.
