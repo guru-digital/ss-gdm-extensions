@@ -54,4 +54,15 @@ class SSGuru_Controller extends Extension
     {
         return Director::isLive();
     }
+
+    /**
+     * This function will return the string 'dev', 'test' or 'live' depending on the current site mode
+     * Can also be checked with {@link Director::get_environment_type()}.
+     *
+     * @return string 'dev', 'test' or 'live'
+     */
+    public function getSiteMode()
+    {
+        return Director::get_environment_type();
+    }
 }
