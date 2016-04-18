@@ -27,4 +27,4 @@ Injector:
   RequestProcessor:
     properties:
       filters:
-        - '%$CacheRequestFilter'
+        - '%$HeaderOverrideFilter'
