@@ -23,3 +23,8 @@ ViewableData:
 GridFieldBulkUpload_Request:
   extensions:
     - SSGuru_KickAssetsGridFieldBulkUpload_Request
+Injector:
+  RequestProcessor:
+    properties:
+      filters:
+        - '%$CacheRequestFilter'
