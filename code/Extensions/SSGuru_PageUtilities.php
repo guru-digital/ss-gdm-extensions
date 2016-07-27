@@ -2,7 +2,6 @@
 
 class SSGuru_PageUtilities extends DataExtension
 {
-
     private $forceLeft  = false;
     private $forceRight = false;
 
@@ -13,7 +12,7 @@ class SSGuru_PageUtilities extends DataExtension
         if (strlen($name) != 0) {
             $result = $name;
             if (strlen($link) != 0) {
-                $result = "<a href=\"" . $link . "\"" . (is_null($target) ? "" : " target=\"" . $target . "\"") . ">" . $result . "</a>";
+                $result = "<a href=\"".$link."\"".(is_null($target) ? "" : " target=\"".$target."\"").">".$result."</a>";
             }
         }
         return $result;
@@ -80,7 +79,7 @@ class SSGuru_PageUtilities extends DataExtension
 
     public function getAssetFolder($subfolder = "")
     {
-        return $this->SanitizePath($this->owner->MenuTitle . "/" . $subfolder);
+        return $this->SanitizePath($this->owner->MenuTitle."/".$subfolder);
     }
 
     public function ImageFolder($subfolder = "")
@@ -148,5 +147,10 @@ class SSGuru_PageUtilities extends DataExtension
             $parent = $parent->Parent();
         }
         return $parent->ClassName === $objectType ? $parent : false;
+    }
+
+    public function MenuTree()
+    {
+        return PageMenuTree::Instance();
     }
 }
