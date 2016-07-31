@@ -39,9 +39,15 @@ class SSGuru_CarouselItem extends DataObject
         $fields = parent::getCMSFields();
         $fields->removeByName('ParentID');
         $fields->removeByName('SortID');
-
+        
         $fields->removeByName('Archived');
         $fields->addFieldToTab('Root.Main', LinkField::create('LinkID', 'Link'));
+        
+        if (class_exists(SelectUploadField)) {
+            $fields->removeByName('Image');
+            $fields->addFieldToTab('Root.Main', SelectUploadField::create("Image", "Image"));
+        }        
+        
         $fields->addFieldToTab('Root.Main', CompositeField::create(array(
                     LabelField::create("LabelArchive", "Archive this carousel item?")->addExtraClass("left"),
                     CheckboxField::create('Archived', '')
