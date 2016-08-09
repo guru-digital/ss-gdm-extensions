@@ -43,7 +43,7 @@ class SSGuru_CarouselItem extends DataObject
         $fields->removeByName('Archived');
         $fields->addFieldToTab('Root.Main', LinkField::create('LinkID', 'Link'));
         
-        if (class_exists(SelectUploadField)) {
+        if (class_exists('SelectUploadField')) {
             $fields->removeByName('Image');
             $fields->addFieldToTab('Root.Main', SelectUploadField::create("Image", "Image"));
         }        
