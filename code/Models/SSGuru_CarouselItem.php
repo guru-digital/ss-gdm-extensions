@@ -12,21 +12,20 @@
  */
 class SSGuru_CarouselItem extends DataObject
 {
-
     private static $singular_name = "Carousel Item";
     private static $plural_name   = "Carousel Items";
-    public static $db                    = array(
+    public static $db             = array(
         'Title'    => 'Varchar(255)',
         'Caption'  => 'Text',
         'Archived' => 'Boolean',
         'SortID'   => 'Int'
     );
-    public static $has_one               = array(
+    public static $has_one        = array(
         'Parent' => 'Page',
         'Image'  => 'Image',
         'Link'   => 'Link'
     );
-    public static $summary_fields        = array(
+    public static $summary_fields = array(
         'ImageThumb'       => 'Image',
         'Title'            => 'Title',
         'Caption'          => 'Text',
@@ -39,28 +38,39 @@ class SSGuru_CarouselItem extends DataObject
         $fields = parent::getCMSFields();
         $fields->removeByName('ParentID');
         $fields->removeByName('SortID');
-        
+
         $fields->removeByName('Archived');
         $fields->addFieldToTab('Root.Main', LinkField::create('LinkID', 'Link'));
-        
+
         if (class_exists('SelectUploadField')) {
             $fields->removeByName('Image');
-            $fields->addFieldToTab('Root.Main', SelectUploadField::create("Image", "Image"));
-        }        
-        
-        $fields->addFieldToTab('Root.Main', CompositeField::create(array(
-                    LabelField::create("LabelArchive", "Archive this carousel item?")->addExtraClass("left"),
-                    CheckboxField::create('Archived', '')
-                ))->addExtraClass("field special")
+            $imageField = SelectUploadField::create("Image", "Image");
+            if ($this->Parent() && $this->Parent()->exists()) {
+//                Debug::message($this->Parent()->ImageFolder("carousel"));
+                $uploadFolderPath = $this->Parent()->ImageFolder("carousel");
+                $imageField->setFolderName($uploadFolderPath);
+                $uploadFolder     = File::find($uploadFolderPath);
+                if ($uploadFolder) {
+                    $imageField->FolderSelector()->setValue($uploadFolder->ID);
+                }
+            }
+            $fields->addFieldToTab('Root.Main',$imageField);
+        }
+
+        $fields->addFieldToTab('Root.Main',
+                               CompositeField::create(array(
+                LabelField::create("LabelArchive", "Archive this carousel item?")->addExtraClass("left"),
+                CheckboxField::create('Archived', '')
+            ))->addExtraClass("field special")
         );
         $imageField = $fields->dataFieldByName('Image');
         if ($imageField) {
             $imageField->
-                    setAllowedFileCategories("image")->
-                    setAllowedMaxFileNumber(1);
+                setAllowedFileCategories("image")->
+                setAllowedMaxFileNumber(1);
             if ($this->Parent() && $this->Parent()->hasMethod("ImageFolder")) {
                 $imageField->
-                        setFolderName($this->Parent()->ImageFolder("carousel"));
+                    setFolderName($this->Parent()->ImageFolder("carousel"));
             }
         }
         return $fields;
