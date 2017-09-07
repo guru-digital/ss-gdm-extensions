@@ -4,13 +4,10 @@
     "type": "silverstripe-module",
     "require": {
         "silverstripe/cms": "^3.1",
-        "symbiote/silverstripe-gridfieldextensions": "^1.4",
+        "symbiote/silverstripe-gridfieldextensions": "^2.0.0",
         "silverstripe/userforms": "^4",
         "sheadawson/silverstripe-linkable": "^1.0",
         "unclecheese/betterbuttons": "^1.2"
-    },
-    "replace": {
-        "silverstripe-australia/gridfieldextensions": "^1.4"
     },
     "extra": {
         "installer-name": "silverstripe-gdm-extensions"
